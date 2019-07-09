@@ -6,6 +6,7 @@ from torch.utils.data import DataLoader
 from torchvision import transforms
 
 from utils import *
+import utils
 from models import *
 from losses.multi import MultiClassCriterion
 import argparse
@@ -14,7 +15,6 @@ import numpy as np
 from PIL import Image
 import math
 import SimpleITK as sitk
-from utils.preprocessing import window_normalize
 
 torch.cuda.set_device(0)
 
@@ -95,7 +95,16 @@ def train(epoch):
             optimizer.zero_grad()
             outputs = net(inputs)
 
-            criterion = MultiClassCriterion('CrossEntropy')
+            pred=outputs.argmax(dim=1)
+            prediction = np.array(pred.detach().cpu())
+            l = np.array(labels.detach().cpu())
+            index = np.where(l==np.max(l))
+            a=np.count_nonzero(prediction)
+            b=np.count_nonzero(l)
+            print(str(a))
+            print(str(b))
+
+            criterion = MultiClassCriterion('OhemCrossEntropy')
             loss = criterion(outputs, labels)
 
             loss.backward()
@@ -110,16 +119,16 @@ def train(epoch):
 def test(epoch):
     global best_eval
     net.eval()
+    evaluator_hd95 = Evaluator_hd95()
     evaluator_dice = Evaluator_dice()
-    evaluator_hd95 = hd95()
     with torch.no_grad():
         for idx, sample_name in enumerate(os.listdir(os.path.join(testing_root))):
             volume_path = os.path.join(testing_root, sample_name, 'data.nii.gz')
             gt_path = os.path.join(testing_root, sample_name, 'label.nii.gz')
             itk_CT = sitk.ReadImage(volume_path)
             itk_gt = sitk.ReadImage(gt_path)
-            torch_CT = test_set._itk_transfor(itk_CT)
-            torch_gt = test_set._itk_transfor(itk_gt)
+            torch_CT = test_set._img_transfor(itk_CT)
+            torch_gt = test_set._label_transfor(itk_gt)
             sub_batch_len = torch_CT.shape[0]
             pred_list = []
             for sub_batch_idx in range(sub_batch_len):
@@ -128,18 +137,22 @@ def test(epoch):
                 img_var = Variable(img).cuda()
                 outputs = net(img_var)
                 outputs = outputs.argmax(dim=1)
-                prediction = np.array(outputs.detach().squeeze(0).cpu())
+                prediction = np.array(outputs.detach().cpu())
+                # a=np.count_nonzero(prediction)
+                # print(str(a))
                 # prediction = crf_refine(np.array(img.permute(0,2,3,1)).squeeze(0).astype(np.uint8), prediction.astype(np.uint8))
 
                 pred_list.append(prediction)
             pred_volume = np.concatenate(pred_list).astype(np.uint8)
             gt_volume = np.array(torch_gt, dtype=np.uint8)
             # cal each class dice and hd95
-            for class_id in range(1, test_set.output_channels):
+            for class_id in range(0, test_set.outputs_channels):
                 pred_class_volume = pred_volume == class_id
                 gt_class_volume = gt_volume == class_id
-                evaluator_hd95.add_volume(pred_class_volume, gt_class_volume)
-                evaluator_dice.add_volume(pred_class_volume, gt_class_volume)
+                print('pred %.4f'%(np.count_nonzero(pred_class_volume)))
+                print('gt %.4f' % (np.count_nonzero(gt_class_volume)))
+                # evaluator_hd95.add_volume(pred_class_volume, gt_class_volume)
+                # evaluator_dice.add_volume(pred_class_volume, gt_class_volume)
 
             current_dice = evaluator_dice.get_eval()
             current_hd95 = evaluator_hd95.get_eval()

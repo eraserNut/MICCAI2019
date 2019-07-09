@@ -19,7 +19,7 @@ class Evaluator_dice(object):
         return self.diceAll/self.num
 
 
-class hd95(object):
+class Evaluator_hd95(object):
     def __init__(self):
         self.hd95All = 0
         self.num = 0
