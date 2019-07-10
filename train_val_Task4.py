@@ -19,7 +19,7 @@ import SimpleITK as sitk
 torch.cuda.set_device(0)
 
 ### Load parameters
-Task = 'Task2' #{Task1, Task2, Task3, Task4}
+Task = 'Task4' #{Task1, Task2, Task3, Task4}
 ckpt_path = './ckpt_' + Task
 exp_name = 'UNET'
 # encoder = 'ResNeXt101' #{ResNeXt101, Resnet18}

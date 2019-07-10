@@ -14,7 +14,7 @@ class Evaluator_dice(object):
         # print(str(intersection))
         # print(str(pred.sum()))
         # print(str(target.sum()))
-        current_dice = (2. * intersection) / (pred.sum() + target.sum())
+        current_dice = (2. * intersection) / (pred.sum() + target.sum()) if (pred.sum() + target.sum())!=0 else 1
         self.diceAll += current_dice
         self.num += 1
 
