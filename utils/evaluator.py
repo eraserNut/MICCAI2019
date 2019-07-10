@@ -10,6 +10,10 @@ class Evaluator_dice(object):
 
     def add_volume(self, pred, target):
         intersection = (pred * target).sum()
+        # print('****')
+        # print(str(intersection))
+        # print(str(pred.sum()))
+        # print(str(target.sum()))
         current_dice = (2. * intersection) / (pred.sum() + target.sum())
         self.diceAll += current_dice
         self.num += 1

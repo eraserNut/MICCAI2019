@@ -89,20 +89,29 @@ def train(epoch):
             inputs = inputs.expand(torch.Size((inputs.shape[0], 3, inputs.shape[2], inputs.shape[3]))) #adjust to net input channel
             # labels = labels_volume[:, start:end, :, :].permute(1, 0, 2, 3)
             labels = labels_volume[:, start:end, :, :].squeeze(0)
+            # training trick
+            tmp = np.array(labels)
+            tmp[0, :128, :] = 255
+            tmp[0, 384:, :] = 255
+            tmp[0, :, :128] = 255
+            tmp[0, :, 384:] = 255
+            labels = torch.from_numpy(tmp)
+
+
             batch_size = inputs.size(0)
             inputs = Variable(inputs).cuda()
             labels = Variable(labels).cuda()
             optimizer.zero_grad()
             outputs = net(inputs)
 
-            pred=outputs.argmax(dim=1)
-            prediction = np.array(pred.detach().cpu())
-            l = np.array(labels.detach().cpu())
-            index = np.where(l==np.max(l))
-            a=np.count_nonzero(prediction)
-            b=np.count_nonzero(l)
-            print(str(a))
-            print(str(b))
+            # pred=outputs.argmax(dim=1)
+            # prediction = np.array(pred.detach().cpu())
+            # l = np.array(labels.detach().cpu())
+            # index = np.where(l==np.max(l))
+            # a=np.count_nonzero(prediction)
+            # b=np.count_nonzero(l)
+            # print(str(a))
+            # print(str(b))
 
             criterion = MultiClassCriterion('OhemCrossEntropy')
             loss = criterion(outputs, labels)
@@ -146,21 +155,25 @@ def test(epoch):
             pred_volume = np.concatenate(pred_list).astype(np.uint8)
             gt_volume = np.array(torch_gt, dtype=np.uint8)
             # cal each class dice and hd95
-            for class_id in range(0, test_set.outputs_channels):
+            for class_id in range(1, test_set.outputs_channels):
                 pred_class_volume = pred_volume == class_id
                 gt_class_volume = gt_volume == class_id
-                print('pred %.4f'%(np.count_nonzero(pred_class_volume)))
-                print('gt %.4f' % (np.count_nonzero(gt_class_volume)))
+                # print('pred %.4f'%(np.count_nonzero(pred_class_volume)))
+                # print('gt %.4f' % (np.count_nonzero(gt_class_volume)))
+
                 # evaluator_hd95.add_volume(pred_class_volume, gt_class_volume)
-                # evaluator_dice.add_volume(pred_class_volume, gt_class_volume)
+                evaluator_dice.add_volume(pred_class_volume, gt_class_volume)
 
             current_dice = evaluator_dice.get_eval()
-            current_hd95 = evaluator_hd95.get_eval()
-            progress_bar(idx, len(os.listdir(os.path.join(testing_root))), 'Dice: %.4f, hd95: %.4f'% (current_dice, current_hd95))
+            # current_hd95 = evaluator_hd95.get_eval()
+            # progress_bar(idx, len(os.listdir(os.path.join(testing_root))), 'Dice: %.4f, hd95: %.4f'% (current_dice, current_hd95))
+            progress_bar(idx, len(os.listdir(os.path.join(testing_root))),
+                         'Dice: %.4f' % (current_dice))
 
         dice = evaluator_dice.get_eval()
-        hd95 = evaluator_hd95.get_eval()
-        print('Mean dice is %.4f | Mean hd95 is %.4f'%(dice, hd95))
+        # hd95 = evaluator_hd95.get_eval()
+        # print('Mean dice is %.4f | Mean hd95 is %.4f'%(dice, hd95))
+        print('Mean dice is %.4f' % (dice))
 
         # Save checkpoint.
         if dice > best_eval and not flag.test:
