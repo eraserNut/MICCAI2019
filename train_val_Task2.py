@@ -90,12 +90,12 @@ def train(epoch):
             # labels = labels_volume[:, start:end, :, :].permute(1, 0, 2, 3)
             labels = labels_volume[:, start:end, :, :].squeeze(0)
             # training trick
-            tmp = np.array(labels)
-            tmp[0, :128, :] = 255
-            tmp[0, 384:, :] = 255
-            tmp[0, :, :128] = 255
-            tmp[0, :, 384:] = 255
-            labels = torch.from_numpy(tmp)
+            # tmp = np.array(labels)
+            # tmp[0, :128, :] = 255
+            # tmp[0, 384:, :] = 255
+            # tmp[0, :, :128] = 255
+            # tmp[0, :, 384:] = 255
+            # labels = torch.from_numpy(tmp)
 
 
             batch_size = inputs.size(0)

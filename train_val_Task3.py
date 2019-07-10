@@ -19,7 +19,7 @@ import SimpleITK as sitk
 torch.cuda.set_device(0)
 
 ### Load parameters
-Task = 'Task1' #{Task1, Task2, Task3, Task4}
+Task = 'Task3' #{Task1, Task2, Task3, Task4}
 ckpt_path = './ckpt_' + Task
 exp_name = 'UNET'
 # encoder = 'ResNeXt101' #{ResNeXt101, Resnet18}
@@ -90,12 +90,12 @@ def train(epoch):
             # labels = labels_volume[:, start:end, :, :].permute(1, 0, 2, 3)
             labels = labels_volume[:, start:end, :, :].squeeze(0)
             # training trick
-            tmp = np.array(labels)
-            tmp[0, :128, :] = 255
-            tmp[0, 384:, :] = 255
-            tmp[0, :, :128] = 255
-            tmp[0, :, 384:] = 255
-            labels = torch.from_numpy(tmp)
+            # tmp = np.array(labels)
+            # tmp[0, :128, :] = 255
+            # tmp[0, 384:, :] = 255
+            # tmp[0, :, :128] = 255
+            # tmp[0, :, 384:] = 255
+            # labels = torch.from_numpy(tmp)
 
 
             batch_size = inputs.size(0)
