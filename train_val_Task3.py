@@ -21,7 +21,7 @@ torch.cuda.set_device(0)
 ### Load parameters
 Task = 'Task3' #{Task1, Task2, Task3, Task4}
 ckpt_path = './ckpt_' + Task
-exp_name = 'UNET'
+exp_name = 'FPN'
 # encoder = 'ResNeXt101' #{ResNeXt101, Resnet18}
 args_config = os.path.join('./models', exp_name, 'config.yaml')
 args = yaml.load(open(args_config))
