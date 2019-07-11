@@ -21,7 +21,7 @@ torch.cuda.set_device(0)
 ### Load parameters
 Task = 'Task3' #{Task1, Task2, Task3, Task4}
 ckpt_path = './ckpt_' + Task
-exp_name = 'FPN'
+exp_name = 'DeepLab_V3'
 # encoder = 'ResNeXt101' #{ResNeXt101, Resnet18}
 args_config = os.path.join('./models', exp_name, 'config.yaml')
 args = yaml.load(open(args_config))
@@ -89,6 +89,10 @@ def train(epoch):
             inputs = inputs.expand(torch.Size((inputs.shape[0], 3, inputs.shape[2], inputs.shape[3]))) #adjust to net input channel
             # labels = labels_volume[:, start:end, :, :].permute(1, 0, 2, 3)
             labels = labels_volume[:, start:end, :, :].squeeze(0)
+            # add batch for batch_norm when training
+            if labels.shape[0] == 1:
+                labels = labels.expand(torch.Size((args['train_batch_size'], labels.shape[1], labels.shape[2])))
+                inputs = inputs.expand(torch.Size((args['train_batch_size'], 3, inputs.shape[2], inputs.shape[3])))
             # training trick
             # tmp = np.array(labels)
             # tmp[0, :128, :] = 255
