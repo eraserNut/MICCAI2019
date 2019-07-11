@@ -36,5 +36,5 @@ class dataset(Dataset):
 
     def _label_transfor(self, itk):
         img_arr = sitk.GetArrayFromImage(itk).astype(np.float32)
-        torch_itk = torch.from_numpy(img_arr.astype(np.long))
+        torch_itk = torch.from_numpy(img_arr)
         return torch_itk
