@@ -12,9 +12,9 @@
 
 ### Experiment results <a name="results"></a>
 
-<sub>We test these four segmentation models at a liver datasets. We rewrite the framework with reference to [DAF](https://github.com/zijundeng/DAF).
- The model implementations of Unet,FPN and DAF are dependent on github while Unet++ is implemented by ourself. 
- For fair, we train all models with 60 epochs and add evaluation for each epoch. Then save best epoch as the last result. We evaluate them with two norm: Dice and F1, all results as follows:</sub>
+<sub>We test several segmentation models at a MICCAI SegStruct datasets.
+ For fair, we train all models with 60 epochs and add evaluation for each epoch.
+ Then save best epoch as the last result. We evaluate them with two evaluation: Dice and HD95%, all results as follows:</sub>
 
 #### Task1(Nasopharynx cancer):
 
