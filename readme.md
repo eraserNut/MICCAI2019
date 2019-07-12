@@ -16,7 +16,7 @@
  The model implementations of Unet,FPN and DAF are dependent on github while Unet++ is implemented by ourself. 
  For fair, we train all models with 60 epochs and add evaluation for each epoch. Then save best epoch as the last result. We evaluate them with two norm: Dice and F1, all results as follows:</sub>
 
-####Task1(Nasopharynx cancer):
+#### Task1(Nasopharynx cancer):
 
 Organ-at-risk segmentation from head & neck CT scans.
 
@@ -33,7 +33,7 @@ Another 10 patients’ CT scans will be used as the test data.</sub>
 |<sub>FPN</sub>| <sub></sub> | <sub></sub> | <sub>Resnet-18</sub>|<sub>4</sub>|<sub>OhemCrossEntropy</sub>|<sub>N</sub>|<sub>Y</sub>|<sub>N</sub>|
 |<sub>DeepLab-V3</sub>| <sub></sub> | <sub></sub> | <sub>Resnet-18</sub>|<sub>4</sub>|<sub>OhemCrossEntropy</sub>|<sub>N</sub>|<sub>Y</sub>|<sub>N</sub>|
 
-####Task2(Nasopharynx cancer):
+#### Task2(Nasopharynx cancer):
 
 Gross Target Volume segmentation of nasopharynx cancer.
 
@@ -49,7 +49,7 @@ Gross Target Volume segmentation of nasopharynx cancer.
 |<sub>FPN</sub>| <sub></sub> | <sub></sub> | <sub>Resnet-18</sub>|<sub>4</sub>|<sub>BCE,Dice</sub>|<sub>N</sub>|<sub>Y</sub>|<sub>N</sub>|
 |<sub>DeepLab-V3</sub>| <sub></sub> | <sub></sub> | <sub>Resnet-18</sub>|<sub>4</sub>|<sub>BCE,Dice</sub>|<sub>N</sub>|<sub>Y</sub>|<sub>N</sub>|
 
-####Task3(Lung cancer):
+#### Task3(Lung cancer):
 
 Organ-at-risk segmentation from chest CT scans.
 
@@ -65,7 +65,7 @@ Organ-at-risk segmentation from chest CT scans.
 |<sub>FPN</sub>| <sub></sub> | <sub></sub> | <sub>Resnet-18</sub>|<sub>4</sub>|<sub>OhemCrossEntropy</sub>|<sub>N</sub>|<sub>Y</sub>|<sub>N</sub>|
 |<sub>DeepLab-V3</sub>| <sub></sub> | <sub></sub> | <sub>Resnet-18</sub>|<sub>4</sub>|<sub>OhemCrossEntropy</sub>|<sub>N</sub>|<sub>Y</sub>|<sub>N</sub>|
 
-####Task2(Nasopharynx cancer):
+#### Task4(Lung cancer):
 
 Gross Target Volume segmentation of lung cancer.
 
