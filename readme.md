@@ -16,21 +16,66 @@
  The model implementations of Unet,FPN and DAF are dependent on github while Unet++ is implemented by ourself. 
  For fair, we train all models with 60 epochs and add evaluation for each epoch. Then save best epoch as the last result. We evaluate them with two norm: Dice and F1, all results as follows:</sub>
 
-#####Task1:
+####Task1(Nasopharynx cancer):
+
 Organ-at-risk segmentation from head & neck CT scans.
 
 <sub>22 OARs of 50 nasopharynx cancer patients will be annotated and released to public as the training data. Each of the annotated CT scan is marked by one experienced oncologist and verified by another experienced one. 
 Another 10 patients’ CT scans will be used as the test data.</sub>
 
-![Image text](https://structseg2019.grand-challenge.org/media/i/acd93612.png)
-![Image text](https://structseg2019.grand-challenge.org/media/i/e3c5b158.png)
-![Image text](https://structseg2019.grand-challenge.org/media/i/b879fd0b.png)
+<img src="https://structseg2019.grand-challenge.org/media/i/acd93612.png" width="150" height="170"/>
+<img src="https://structseg2019.grand-challenge.org/media/i/e3c5b158.png" width="150" height="170"/>
+<img src="https://structseg2019.grand-challenge.org/media/i/b879fd0b.png" width="150" height="170"/>
 
 | <sub>Model</sub> | <sub>Dice</sub> | <sub>HD95%</sub> | <sub>Encoder</sub> | <sub>Batch size</sub>|<sub>Loss function</sub>| <sub>Resized</sub>|<sub>Use pretrained </sub>|<sub>Rcf refine</sub>|
 |:-----------------------------:|:----:|:---------------------:|:--------------------:|:--------------------:|:--------------------:|:--------------------:|:--------------------:|:--------------------:|
-|<sub>Unet</sub>| <sub>0.9494</sub> | <sub>0.9503</sub> | <sub>Resnet-18</sub>|<sub>4</sub>|<sub>bcd,dice</sub>|<sub>(448,448)</sub>|<sub>Y</sub>|<sub>Y</sub>|
-|<sub>Unet++</sub>| <sub>0.9453</sub> | <sub>0.9465</sub> | <sub>Resnet-18</sub>|<sub>8</sub>|<sub>bcd,dice</sub>|<sub>(224,224)</sub>|<sub>Y</sub>|<sub>Y</sub>|
-|<sub>FPN</sub>| <sub>0.9493</sub> | <sub> 0.9491</sub> | <sub>Resnet-18</sub>|<sub>4</sub>|<sub>bcd,dice</sub>|<sub>(448,448)</sub>|<sub>Y</sub>|<sub>Y</sub>|
-|<sub>DAF</sub>| <sub>**0.9515**</sub> | <sub>**0.9515**</sub> | <sub>ResNext-101</sub>|<sub>4</sub>|<sub>bcd,dice</sub>|<sub>(448,448)</sub>|<sub>Y</sub>|<sub>Y</sub>|
+|<sub>Unet</sub>| <sub></sub> | <sub></sub> | <sub>Resnet-18</sub>|<sub>4</sub>|<sub>OhemCrossEntropy</sub>|<sub>N</sub>|<sub>Y</sub>|<sub>N</sub>|
+|<sub>FPN</sub>| <sub></sub> | <sub></sub> | <sub>Resnet-18</sub>|<sub>4</sub>|<sub>OhemCrossEntropy</sub>|<sub>N</sub>|<sub>Y</sub>|<sub>N</sub>|
+|<sub>DeepLab-V3</sub>| <sub></sub> | <sub></sub> | <sub>Resnet-18</sub>|<sub>4</sub>|<sub>OhemCrossEntropy</sub>|<sub>N</sub>|<sub>Y</sub>|<sub>N</sub>|
 
-#####Task2:
+####Task2(Nasopharynx cancer):
+
+Gross Target Volume segmentation of nasopharynx cancer.
+
+<sub>The 50 GTV annotations of the same 50 nasopharynx cancer patients’ CT scans will be provided as the training data and another 10 patients’ GTV will be used as the test data.</sub>
+
+<img src="https://structseg2019.grand-challenge.org/media/i/81824b0c.png" width="150" height="170"/>
+<img src="https://structseg2019.grand-challenge.org/media/i/245a51f1.png" width="150" height="170"/>
+<img src="https://structseg2019.grand-challenge.org/media/i/c3f373bd.png" width="150" height="170"/>
+
+| <sub>Model</sub> | <sub>Dice</sub> | <sub>HD95%</sub> | <sub>Encoder</sub> | <sub>Batch size</sub>|<sub>Loss function</sub>| <sub>Resized</sub>|<sub>Use pretrained </sub>|<sub>Rcf refine</sub>|
+|:-----------------------------:|:----:|:---------------------:|:--------------------:|:--------------------:|:--------------------:|:--------------------:|:--------------------:|:--------------------:|
+|<sub>Unet</sub>| <sub></sub> | <sub></sub> | <sub>Resnet-18</sub>|<sub>4</sub>|<sub>BCE,Dice</sub>|<sub>N</sub>|<sub>Y</sub>|<sub>N</sub>|
+|<sub>FPN</sub>| <sub></sub> | <sub></sub> | <sub>Resnet-18</sub>|<sub>4</sub>|<sub>BCE,Dice</sub>|<sub>N</sub>|<sub>Y</sub>|<sub>N</sub>|
+|<sub>DeepLab-V3</sub>| <sub></sub> | <sub></sub> | <sub>Resnet-18</sub>|<sub>4</sub>|<sub>BCE,Dice</sub>|<sub>N</sub>|<sub>Y</sub>|<sub>N</sub>|
+
+####Task3(Lung cancer):
+
+Organ-at-risk segmentation from chest CT scans.
+
+<sub>6 OARs of 50 lung cancer patients will be annotated and released to public as the training data. Another 10 patients’ CT scans will be used as the test data. Each CT scan is annotated by one experienced oncologist and verified by another one.</sub>
+
+<img src="https://structseg2019.grand-challenge.org/media/i/9bb6cffc.png" width="220" height="170"/>
+<img src="https://structseg2019.grand-challenge.org/media/i/d5a47356.png" width="220" height="170"/>
+
+
+| <sub>Model</sub> | <sub>Dice</sub> | <sub>HD95%</sub> | <sub>Encoder</sub> | <sub>Batch size</sub>|<sub>Loss function</sub>| <sub>Resized</sub>|<sub>Use pretrained </sub>|<sub>Rcf refine</sub>|
+|:-----------------------------:|:----:|:---------------------:|:--------------------:|:--------------------:|:--------------------:|:--------------------:|:--------------------:|:--------------------:|
+|<sub>Unet</sub>| <sub></sub> | <sub></sub> | <sub>Resnet-18</sub>|<sub>4</sub>|<sub>OhemCrossEntropy</sub>|<sub>N</sub>|<sub>Y</sub>|<sub>N</sub>|
+|<sub>FPN</sub>| <sub></sub> | <sub></sub> | <sub>Resnet-18</sub>|<sub>4</sub>|<sub>OhemCrossEntropy</sub>|<sub>N</sub>|<sub>Y</sub>|<sub>N</sub>|
+|<sub>DeepLab-V3</sub>| <sub></sub> | <sub></sub> | <sub>Resnet-18</sub>|<sub>4</sub>|<sub>OhemCrossEntropy</sub>|<sub>N</sub>|<sub>Y</sub>|<sub>N</sub>|
+
+####Task2(Nasopharynx cancer):
+
+Gross Target Volume segmentation of lung cancer.
+
+<sub>The 50 GTV annotations of the same 50 lung cancer patients’ CT scans will be provided as the training data and another 10 patients’ GTV will be used as the test data. Each CT scan is annotated by one experienced oncologist and verified by another one.</sub>
+
+<img src="https://structseg2019.grand-challenge.org/media/i/7795aea7.png" width="250" height="170"/>
+<img src="https://structseg2019.grand-challenge.org/media/i/d86db96d.png" width="250" height="170"/>
+
+| <sub>Model</sub> | <sub>Dice</sub> | <sub>HD95%</sub> | <sub>Encoder</sub> | <sub>Batch size</sub>|<sub>Loss function</sub>| <sub>Resized</sub>|<sub>Use pretrained </sub>|<sub>Rcf refine</sub>|
+|:-----------------------------:|:----:|:---------------------:|:--------------------:|:--------------------:|:--------------------:|:--------------------:|:--------------------:|:--------------------:|
+|<sub>Unet</sub>| <sub></sub> | <sub></sub> | <sub>Resnet-18</sub>|<sub>4</sub>|<sub>BCE,Dice</sub>|<sub>N</sub>|<sub>Y</sub>|<sub>N</sub>|
+|<sub>FPN</sub>| <sub></sub> | <sub></sub> | <sub>Resnet-18</sub>|<sub>4</sub>|<sub>BCE,Dice</sub>|<sub>N</sub>|<sub>Y</sub>|<sub>N</sub>|
+|<sub>DeepLab-V3</sub>| <sub></sub> | <sub></sub> | <sub>Resnet-18</sub>|<sub>4</sub>|<sub>BCE,Dice</sub>|<sub>N</sub>|<sub>Y</sub>|<sub>N</sub>|
