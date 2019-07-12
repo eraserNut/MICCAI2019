@@ -23,9 +23,13 @@ Organ-at-risk segmentation from head & neck CT scans.
 <sub>22 OARs of 50 nasopharynx cancer patients will be annotated and released to public as the training data. Each of the annotated CT scan is marked by one experienced oncologist and verified by another experienced one. 
 Another 10 patients’ CT scans will be used as the test data.</sub>
 
-<img src="https://structseg2019.grand-challenge.org/media/i/acd93612.png" width="150" height="170"/>
-<img src="https://structseg2019.grand-challenge.org/media/i/e3c5b158.png" width="150" height="170"/>
-<img src="https://structseg2019.grand-challenge.org/media/i/b879fd0b.png" width="150" height="170"/>
+<table>
+    <tr>
+        <td><img src="https://structseg2019.grand-challenge.org/media/i/acd93612.png" width="150" height="170"/></td>
+        <td><img src="https://structseg2019.grand-challenge.org/media/i/e3c5b158.png" width="150" height="170"/></td>
+        <td><img src="https://structseg2019.grand-challenge.org/media/i/b879fd0b.png" width="150" height="170"/></td>
+    </tr>
+</table>
 
 | <sub>Model</sub> | <sub>Dice</sub> | <sub>HD95%</sub> | <sub>Encoder</sub> | <sub>Batch size</sub>|<sub>Loss function</sub>| <sub>Resized</sub>|<sub>Use pretrained </sub>|<sub>Rcf refine</sub>|
 |:-----------------------------:|:----:|:---------------------:|:--------------------:|:--------------------:|:--------------------:|:--------------------:|:--------------------:|:--------------------:|
@@ -39,9 +43,13 @@ Gross Target Volume segmentation of nasopharynx cancer.
 
 <sub>The 50 GTV annotations of the same 50 nasopharynx cancer patients’ CT scans will be provided as the training data and another 10 patients’ GTV will be used as the test data.</sub>
 
-<img src="https://structseg2019.grand-challenge.org/media/i/81824b0c.png" width="150" height="170"/>
-<img src="https://structseg2019.grand-challenge.org/media/i/245a51f1.png" width="150" height="170"/>
-<img src="https://structseg2019.grand-challenge.org/media/i/c3f373bd.png" width="150" height="170"/>
+<table>
+    <tr>
+        <td><img src="https://structseg2019.grand-challenge.org/media/i/81824b0c.png" width="150" height="170"/></td>
+        <td><img src="https://structseg2019.grand-challenge.org/media/i/245a51f1.png" width="150" height="170"/></td>
+        <td><img src="https://structseg2019.grand-challenge.org/media/i/c3f373bd.png" width="150" height="170"/></td>
+    </tr>
+</table>
 
 | <sub>Model</sub> | <sub>Dice</sub> | <sub>HD95%</sub> | <sub>Encoder</sub> | <sub>Batch size</sub>|<sub>Loss function</sub>| <sub>Resized</sub>|<sub>Use pretrained </sub>|<sub>Rcf refine</sub>|
 |:-----------------------------:|:----:|:---------------------:|:--------------------:|:--------------------:|:--------------------:|:--------------------:|:--------------------:|:--------------------:|
@@ -75,8 +83,12 @@ Gross Target Volume segmentation of lung cancer.
 
 <sub>The 50 GTV annotations of the same 50 lung cancer patients’ CT scans will be provided as the training data and another 10 patients’ GTV will be used as the test data. Each CT scan is annotated by one experienced oncologist and verified by another one.</sub>
 
-<img src="https://structseg2019.grand-challenge.org/media/i/7795aea7.png" width="250" height="170"/>
-<img src="https://structseg2019.grand-challenge.org/media/i/d86db96d.png" width="250" height="170"/>
+<table>
+    <tr>
+        <td><img src="https://structseg2019.grand-challenge.org/media/i/7795aea7.png" width="250" height="170"/></td>
+        <td><img src="https://structseg2019.grand-challenge.org/media/i/d86db96d.png" width="250" height="170"/></td>
+    </tr>
+</table>
 
 | <sub>Model</sub> | <sub>Dice</sub> | <sub>HD95%</sub> | <sub>Encoder</sub> | <sub>Batch size</sub>|<sub>Loss function</sub>| <sub>Resized</sub>|<sub>Use pretrained </sub>|<sub>Rcf refine</sub>|
 |:-----------------------------:|:----:|:---------------------:|:--------------------:|:--------------------:|:--------------------:|:--------------------:|:--------------------:|:--------------------:|
