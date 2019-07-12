@@ -32,3 +32,5 @@ Another 10 patients’ CT scans will be used as the test data.</sub>
 |<sub>Unet++</sub>| <sub>0.9453</sub> | <sub>0.9465</sub> | <sub>Resnet-18</sub>|<sub>8</sub>|<sub>bcd,dice</sub>|<sub>(224,224)</sub>|<sub>Y</sub>|<sub>Y</sub>|
 |<sub>FPN</sub>| <sub>0.9493</sub> | <sub> 0.9491</sub> | <sub>Resnet-18</sub>|<sub>4</sub>|<sub>bcd,dice</sub>|<sub>(448,448)</sub>|<sub>Y</sub>|<sub>Y</sub>|
 |<sub>DAF</sub>| <sub>**0.9515**</sub> | <sub>**0.9515**</sub> | <sub>ResNext-101</sub>|<sub>4</sub>|<sub>bcd,dice</sub>|<sub>(448,448)</sub>|<sub>Y</sub>|<sub>Y</sub>|
+
+#####Task2:
