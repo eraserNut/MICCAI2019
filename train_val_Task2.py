@@ -103,6 +103,7 @@ def train(epoch):
             labels = Variable(labels).cuda()
             optimizer.zero_grad()
             outputs = net(inputs)
+            outputs = outputs.squeeze(1)
 
             # pred=outputs.argmax(dim=1)
             # prediction = np.array(pred.detach().cpu())

@@ -63,23 +63,23 @@ class FPN(Model):
 
     def __init__(
             self,
-            # encoder_channels=[512, 256, 128, 64],
-            encoder_channels=[2048, 1024, 512, 256],
+            encoder_channels=[512, 256, 128, 64],
+            # encoder_channels=[2048, 1024, 512, 256],
             pyramid_channels=256,
             segmentation_channels=128,
             n_class=1,
             dropout=0.2,
     ):
         super().__init__()
-        # self.base_model = models.resnet18(pretrained=True)
-        # self.base_layers = list(self.base_model.children())
-        # # ==> encoder layers
-        # self.layer_down0 = nn.Sequential(*self.base_layers[:3])  # size=(N, 64, x.H/2, x.W/2)
-        # self.layer_down1 = nn.Sequential(*self.base_layers[3:5])  # size=(N, 64, x.H/4, x.W/4)
-        # self.layer_down2 = self.base_layers[5]  # size=(N, 128, x.H/8, x.W/8)
-        # self.layer_down3 = self.base_layers[6]  # size=(N, 256, x.H/16, x.W/16)
-        # self.layer_down4 = self.base_layers[7]  # size=(N, 512, x.H/32, x.W/32)
-        self.resnext = ResNeXt101()
+        self.base_model = models.resnet18(pretrained=True)
+        self.base_layers = list(self.base_model.children())
+        # ==> encoder layers
+        self.layer_down0 = nn.Sequential(*self.base_layers[:3])  # size=(N, 64, x.H/2, x.W/2)
+        self.layer_down1 = nn.Sequential(*self.base_layers[3:5])  # size=(N, 64, x.H/4, x.W/4)
+        self.layer_down2 = self.base_layers[5]  # size=(N, 128, x.H/8, x.W/8)
+        self.layer_down3 = self.base_layers[6]  # size=(N, 256, x.H/16, x.W/16)
+        self.layer_down4 = self.base_layers[7]  # size=(N, 512, x.H/32, x.W/32)
+        # self.resnext = ResNeXt101()
 
 
         self.conv1 = nn.Conv2d(encoder_channels[0], pyramid_channels, kernel_size=(1, 1))
@@ -100,17 +100,17 @@ class FPN(Model):
 
     def forward(self, x):
         # ==> get encoder features
-        # c1 = self.layer_down0(x)
-        # c2 = self.layer_down1(c1)
-        # c3 = self.layer_down2(c2)
-        # c4 = self.layer_down3(c3)
-        # c5 = self.layer_down4(c4)
+        c1 = self.layer_down0(x)
+        c2 = self.layer_down1(c1)
+        c3 = self.layer_down2(c2)
+        c4 = self.layer_down3(c3)
+        c5 = self.layer_down4(c4)
 
-        c1 = self.resnext.layer0(x)
-        c2 = self.resnext.layer1(c1)
-        c3 = self.resnext.layer2(c2)
-        c4 = self.resnext.layer3(c3)
-        c5 = self.resnext.layer4(c4)
+        # c1 = self.resnext.layer0(x)
+        # c2 = self.resnext.layer1(c1)
+        # c3 = self.resnext.layer2(c2)
+        # c4 = self.resnext.layer3(c3)
+        # c5 = self.resnext.layer4(c4)
 
         p5 = self.conv1(c5)
         p4 = self.p4([p5, c4])

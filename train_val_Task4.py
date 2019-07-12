@@ -21,7 +21,7 @@ torch.cuda.set_device(0)
 ### Load parameters
 Task = 'Task4' #{Task1, Task2, Task3, Task4}
 ckpt_path = './ckpt_' + Task
-exp_name = 'UNET'
+exp_name = 'FPN'
 # encoder = 'ResNeXt101' #{ResNeXt101, Resnet18}
 args_config = os.path.join('./models', exp_name, 'config.yaml')
 args = yaml.load(open(args_config))
@@ -103,6 +103,7 @@ def train(epoch):
             labels = Variable(labels).cuda()
             optimizer.zero_grad()
             outputs = net(inputs)
+            outputs = outputs.squeeze(1)
 
             # pred=outputs.argmax(dim=1)
             # prediction = np.array(pred.detach().cpu())
