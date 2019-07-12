@@ -55,8 +55,12 @@ Organ-at-risk segmentation from chest CT scans.
 
 <sub>6 OARs of 50 lung cancer patients will be annotated and released to public as the training data. Another 10 patients’ CT scans will be used as the test data. Each CT scan is annotated by one experienced oncologist and verified by another one.</sub>
 
-<img src="https://structseg2019.grand-challenge.org/media/i/9bb6cffc.png" width="220" height="170"/>
-<img src="https://structseg2019.grand-challenge.org/media/i/d5a47356.png" width="220" height="170"/>
+<table>
+    <tr>
+        <td><img src="https://structseg2019.grand-challenge.org/media/i/9bb6cffc.png" width="220" height="170"/></td>
+        <td><img src="https://structseg2019.grand-challenge.org/media/i/d5a47356.png" width="220" height="170"/></td>
+    </tr>
+</table>
 
 
 | <sub>Model</sub> | <sub>Dice</sub> | <sub>HD95%</sub> | <sub>Encoder</sub> | <sub>Batch size</sub>|<sub>Loss function</sub>| <sub>Resized</sub>|<sub>Use pretrained </sub>|<sub>Rcf refine</sub>|
